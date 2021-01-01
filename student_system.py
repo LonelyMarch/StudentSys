@@ -223,28 +223,34 @@ def delete():
                     delete_id = input("\n请输入id：")
                     if delete_id != '':
                         break
-                    for info_item in info:
-                        if info_item["id"] != delete_id:
-                            after.append(info_item)
-                        else:
-                            delete_flag = 0
+                for info_item in info:  #DEBUG:
+                    if info_item["id"] != delete_id:
+                        after.append(info_item)
+                    else:
+                        delete_flag = 0
             elif mode == '2':
                 while True:
                     delete_name = input("\n请输入姓名：")
                     if delete_name != '':
                         break
-                    for info_item in info:
-                        if info_item["name"] != delete_name:
-                            after.append(info_item)
-                        else:
-                            delete_flag = 0
+                for info_item in info:
+                    if info_item["name"] != delete_name:
+                        after.append(info_item)
+                    else:
+                        delete_flag = 0
             else:
                 continue
             if delete_flag:
                 print('库中无此学生信息')
             else:
                 save(info, 0)
-                show()
+                print("删除完成\n")
+                while True:
+                    show_answer = input("是否显示现在库中的信息\ty/n\n")
+                    if show_answer in ['y','n']:
+                        break
+                if show_answer == 'y':
+                    show()
             while True:
                 delete_again = input("\n是否继续删除\ty/n\n")
                 if delete_again in ['y', 'n']:
@@ -367,7 +373,7 @@ def save(lst, mode):
     if mode:  # mode为1则追加
         student_info = open(student_info_txt, "a", encoding="utf-8")
     else:  # mode为0则写入
-        student_info = open(student_info_txt, "r", encoding="utf-8")
+        student_info = open(student_info_txt, "w", encoding="utf-8")
     for item in lst:  # 遍历列表中的字典(student_list中可能存在多位学生的信息，所以要遍历，而不是直接追加)
         student_info.write(str(item) + "\n")  # 将字典转换为字符串，再追加
     student_info.close()
