@@ -77,13 +77,13 @@ def insert():
     english_yn = 1
     physics_yn = 1
     while True:  # 循环录入
-        try:    #NOTE:此处的 try_except 可以用 if(os.path.exists)_else 替换
+        try:  # NOTE:此处的 try_except 可以用 if(os.path.exists)_else 替换
             with open(student_info_txt, "r", encoding="utf-8") as rfile:
-                for item in rfile:  #遍历文件的每一个字典，结果为字符串
-                    d = dict(eval(item))    #将字符串转为字典
-                    id_list.append(d["id"])     #追加id到列表
+                for item in rfile:  # 遍历文件的每一个字典，结果为字符串
+                    d = dict(eval(item))  # 将字符串转为字典
+                    id_list.append(d["id"])  # 追加id到列表
         except:
-            open(student_info_txt,'w',encoding='utf-8')     #文件不存在则创建
+            open(student_info_txt, 'w', encoding='utf-8')  # 文件不存在则创建
         if id_yn:  # 如果未成功录入，则录入，否则跳过
             id = input("\n请输入id:")
         if not id:  # 判断id是否不为空
@@ -91,7 +91,7 @@ def insert():
         elif not id.isdecimal():    # 判断id是否不又十进制的数字组成
             print('仅能输入数字')
             continue
-        elif id in id_list:     #判断id是否重复
+        elif id in id_list:  # 判断id是否重复
             print("\nid与信息库中的重复，请重新输入")
             continue
         id_yn = 0  # 标记id录入成功
@@ -148,14 +148,14 @@ def insert():
             continue
         else:
             break
-    save(student_list)  # 写入文件
+    save(student_list, 1)  # 追加进文件
     print("\n学生信息录入完毕\n")
 
 
 def search():
-    info_search = []    #初始化用于储存查询到的学生信息的列表
-    info =[]    #初始化储存库中学生信息的列表
-    if os.path.exists(student_info_txt):    #判断文件是否存在
+    info_search = []  # 初始化用于储存查询到的学生信息的列表
+    info = []  # 初始化储存库中学生信息的列表
+    if os.path.exists(student_info_txt):  # 判断文件是否存在
         with open(student_info_txt, "r", encoding="utf-8") as rfile:
             for item in rfile:
                 info_d = dict(eval(item))
@@ -164,17 +164,17 @@ def search():
         print("\n暂未保存学生信息\n")
         return
     while True:
-        found = 1   #标记是否找到，未找到为1
+        found = 1  # 标记是否找到，未找到为1
         query_mode = input("\n按id查找请输入1\t\t按姓名查找请输入2\n")
         if query_mode == "1":
             while True:
                 query_id = input("\n请输入id：")
                 if query_id != '':
                     break
-            for info_item in info:  #遍历列表中的字典
+            for info_item in info:  # 遍历列表中的字典
                 if info_item["id"] == query_id:
-                        info_search.append(info_item)
-                        found = 0   #如果匹配，标记为0
+                    info_search.append(info_item)
+                    found = 0  # 如果匹配，标记为0
         elif query_mode == "2":
             while True:
                 query_name = input("\n请输入姓名：")
@@ -196,7 +196,7 @@ def search():
             info_search.clear()  # 清空列表
         while True:
             search_again = input("\n是否继续查询?\ty/n\n")
-            if search_again in ['y','n']:   #判断回答是否有误
+            if search_again in ['y', 'n']:  # 判断回答是否有误
                 break
         if search_again == "y":
             continue
@@ -205,40 +205,54 @@ def search():
             break
 
 
-
 def delete():
-    while True:
-        delete_id = input("请输入要删除的学生的id：")
-        if delete_id != "":
-            if os.path.exists(student_info_txt):  # 判断文件是否存在
-                with open(student_info_txt, "r", encoding="utf-8") as info:
-                    student_info = info.readlines()  # 读取文件的每一行到列表
-            else:
-                student_info = []
-            flag = False  # 标记是否删除
-            if student_info:
-                with open(
-                    student_info_txt, "w", encoding="utf-8"
-                ) as wfile:  # 以只写的方式打开文件
-                    w = {}
-                    for item in student_info:
-                        w = dict(eval(item))  # 将字符串转为字典
-                        if w["id"] != delete_id:  # TODO:重写delete函数
-                            wfile.write(str(w) + "\n")
+    if not os.path.exists(student_info_txt):
+        print("暂未保存学生信息")
+    else:
+        while True:
+            info = []
+            after = []
+            delete_flag = 1
+            with open(student_info_txt, 'r', encoding='utf-8') as rfile:
+                for item in rfile:
+                    info_d = dict(eval(item))
+                    info.append(info_d)
+            mode = input("\n按id删除请输入1\t\t按姓名删除请输入2\n")
+            if mode == '1':
+                while True:
+                    delete_id = input("\n请输入id：")
+                    if delete_id != '':
+                        break
+                    for info_item in info:
+                        if info_item["id"] != delete_id:
+                            after.append(info_item)
                         else:
-                            flag = True  # 标记已删除
-                        if flag:
-                            print(f"id为{delete_id}的学生信息已删除")
+                            delete_flag = 0
+            elif mode == '2':
+                while True:
+                    delete_name = input("\n请输入姓名：")
+                    if delete_name != '':
+                        break
+                    for info_item in info:
+                        if info_item["name"] != delete_name:
+                            after.append(info_item)
                         else:
-                            print(f"没有找到id为{delete_id}的学生信息")
+                            delete_flag = 0
             else:
-                print("无学生信息")
-                break
-            show()  # 删除后重新显示学生信息
-            delete_again = input("\n是否继续删除学生信息？\ty/n\n")
+                continue
+            if delete_flag:
+                print('库中无此学生信息')
+            else:
+                save(info, 0)
+                show()
+            while True:
+                delete_again = input("\n是否继续删除\ty/n\n")
+                if delete_again in ['y', 'n']:
+                    break
             if delete_again == "y":
                 continue
             else:
+                print()
                 break
 
 
@@ -349,10 +363,13 @@ def show():
         print("\n暂未保存学生信息\n")
 
 
-def save(lst):
-    student_info = open(student_info_txt, "a", encoding="utf-8")
-    for item in lst:    #遍历列表中的字典(student_list中可能存在多位学生的信息，所以要遍历，而不是直接追加)
-        student_info.write(str(item) + "\n")    #将字典转换为字符串，再追加
+def save(lst, mode):
+    if mode:  # mode为1则追加
+        student_info = open(student_info_txt, "a", encoding="utf-8")
+    else:  # mode为0则写入
+        student_info = open(student_info_txt, "r", encoding="utf-8")
+    for item in lst:  # 遍历列表中的字典(student_list中可能存在多位学生的信息，所以要遍历，而不是直接追加)
+        student_info.write(str(item) + "\n")  # 将字典转换为字符串，再追加
     student_info.close()
 
 
