@@ -422,14 +422,19 @@ def sign_out():
         sign_out()  # 回答错误，再次询问
 
 
-def input(dict, id_yn=1, name_yn=1, chinese_yn=1, math_yn=1, english_yn=1, physics_yn=1,id_repeated=0): #TODO:
-    info =[]
-    id_list=[]
+def input(dict, id_yn=1, name_yn=1, chinese_yn=1, math_yn=1, english_yn=1, physics_yn=1, id_repeated=0, mode="insert", id='', name=''):  # TODO:
+    info = []
+    id_list = []
     with open(student_info_txt, "r", encoding="utf-8") as rfile:
         for item in rfile:
             d = dict(eval(item))
             info.append(d)
             id_list.append(d["id"])
+    if mode == "modify":
+        if not id:
+            pass
+        else:
+            pass
     while True:
         if id_yn:
             id = input("\n请输入id:")
@@ -484,24 +489,6 @@ def input(dict, id_yn=1, name_yn=1, chinese_yn=1, math_yn=1, english_yn=1, physi
             "english": english,
             "physics": physics,
         }  # 将学生信息存入字典
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
