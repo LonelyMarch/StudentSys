@@ -202,7 +202,7 @@ def search():
         if search_again == "y":
             continue
         else:
-            print()     #换行
+            print()  # 换行
             break
     return
 
@@ -212,9 +212,9 @@ def delete():
         print("暂未保存学生信息")
     else:
         while True:
-            info = []   #初始化信息列表
-            after = []  #初始化删除之后的列表
-            delete_flag = 1     #标记是否删除成功
+            info = []  # 初始化信息列表
+            after = []  # 初始化删除之后的列表
+            delete_flag = 1  # 标记是否删除成功
             with open(student_info_txt, 'r', encoding='utf-8') as rfile:
                 for item in rfile:
                     info_d = dict(eval(item))
@@ -227,9 +227,9 @@ def delete():
                         break
                 for info_item in info:
                     if info_item["id"] != delete_id:
-                        after.append(info_item)     #将不是要删除的学生的信息存入列表
+                        after.append(info_item)  # 将不是要删除的学生的信息存入列表
                     else:
-                        delete_flag = 0     #标记已删除
+                        delete_flag = 0  # 标记已删除
             elif mode == '2':
                 while True:
                     delete_name = input("\n请输入姓名：")
@@ -249,7 +249,7 @@ def delete():
                 print("删除完成\n")
                 while True:
                     show_answer = input("是否显示现在库中的信息\ty/n\n")
-                    if show_answer in ['y','n']:
+                    if show_answer in ['y', 'n']:
                         break
                 if show_answer == 'y':
                     show()
@@ -266,37 +266,44 @@ def delete():
 
 
 def modify():
-    show()
-    if os.path.exists(student_info_txt):
-        with open(student_info_txt, "r", encoding="utf-8") as rfile:
-            student_old = rfile.readlines()
-    else:
+    if not os.path.exists(student_info_txt):
         print("\n暂未保存学生信息\n")
         return
-    modify_id = input("请输入要修改的学生的id")
-    with open(student_info_txt, "w", encoding="utf-8") as wfile:
-        for item in student_old:
-            d = dict(eval(item))
-            if d["id"] == modify_id:
-                print("已找到这名学生,可以修改相关信息")
+    else:
+        mode = input("\n按id修改请输入1\t\t按姓名修改请输入2\n")
+        if mode == '1':
+            while True:
+                modify_id = input("\n请输入id：")
+                if modify != '':
+                    break
+            """ with open(student_info_txt,'r',encoding='utf-8') as rfile:
+                    for item in rfile:
+                        d = dict(eval(item))
+                        if d["id"] == modify_id:
+                            print("已找到这名学生,可以修改相关信息")
+                            while True:
+                                try:
+                                    d["name"] = input("请输入姓名：")
+                                    d["chinese"] = input("请输入语文成绩：")
+                                    d["math"] = input("请输入数学成绩：")
+                                    d["english"] = input("请输入英语成绩：")
+                                    d["physics"] = input("请输入物理成绩：")
+                                except:
+                                    print("输入有误，请重新输入")
+                                else:
+                                    break
+                            wfile.write(str(d) + "\n")
+                            print("修改成功")
+                        else:
+                            wfile.write(str(d) + "\n")
+            elif mode == '2':
                 while True:
-                    try:
-                        d["name"] = input("请输入姓名：")
-                        d["chinese"] = input("请输入语文成绩：")
-                        d["math"] = input("请输入数学成绩：")
-                        d["english"] = input("请输入英语成绩：")
-                        d["physics"] = input("请输入物理成绩：")
-                    except:
-                        print("输入有误，请重新输入")
-                    else:
+                    modify_name = input("\n请输入姓名：")
+                    if modify_name != '':
                         break
-                wfile.write(str(d) + "\n")
-                print("修改成功")
-            else:
-                wfile.write(str(d) + "\n")
     modify_again = input("是否继续修改\ty/n\n")
     if modify_again == "y":
-        modify()
+        modify() """
 
 
 def reorder():
@@ -413,6 +420,88 @@ def sign_out():
         main()  # 回答为n，再次执行主函数,就跳过了break
     else:
         sign_out()  # 回答错误，再次询问
+
+
+def input(dict, id_yn=1, name_yn=1, chinese_yn=1, math_yn=1, english_yn=1, physics_yn=1,id_repeated=0): #TODO:
+    info =[]
+    id_list=[]
+    with open(student_info_txt, "r", encoding="utf-8") as rfile:
+        for item in rfile:
+            d = dict(eval(item))
+            info.append(d)
+            id_list.append(d["id"])
+    while True:
+        if id_yn:
+            id = input("\n请输入id:")
+            if not id:  # 判断id是否不为空
+                continue
+            elif not id.isdecimal():    # 判断id是否不又十进制的数字组成
+                print('仅能输入数字')
+                continue
+            if id_repeated:
+                if id in id_list:  # 判断id是否重复
+                    print("\nid与信息库中的重复，请重新输入")
+                    continue
+        id_yn = 0  # 标记id录入成功
+        if name_yn:
+            name = input("请输入姓名:")
+            if not name:
+                continue
+        name_yn = 0
+        try:
+            if chinese_yn:
+                chinese = int(input("请输入语文成绩："))
+        except:  # 捕获因输入的不是整数而产生的错误
+            print("输入无效")
+            continue
+        chinese_yn = 0
+        try:
+            if math_yn:
+                math = int(input("请输入数学成绩："))
+        except:
+            print("输入无效")
+            continue
+        math_yn = 0
+        try:
+            if english_yn:
+                english = int(input("请输入英语成绩："))
+        except:
+            print("输入无效")
+            continue
+        english_yn = 0
+        try:
+            if physics_yn:
+                physics = int(input("请输入物理成绩："))
+        except:
+            print("输入无效")
+            continue
+        physics_yn = 0
+        student = {
+            "id": id,
+            "name": name,
+            "chinese": chinese,
+            "math": math,
+            "english": english,
+            "physics": physics,
+        }  # 将学生信息存入字典
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
