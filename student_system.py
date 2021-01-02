@@ -243,7 +243,7 @@ def delete():
             if delete_flag:
                 print('库中无此学生信息')
             else:
-                save(info, 0)   #DEBUG:
+                save(after, 0)
                 print("删除完成\n")
                 while True:
                     show_answer = input("是否显示现在库中的信息\ty/n\n")
