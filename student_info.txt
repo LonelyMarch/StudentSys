@@ -12,5 +12,3 @@
 {'id': '1014', 'name': '沈十四', 'chinese': 85, 'math': 100, 'english': 105, 'physics': 55}
 {'id': '1015', 'name': '孙十五', 'chinese': 100, 'math': 100, 'english': 100, 'physics': 4}
 {'id': '1017', 'name': '马十七', 'chinese': 0, 'math': 0, 'english': 0, 'physics': 0}
-{'id': '1018', 'name': '某张', 'chinese': 72, 'math': 0, 'english': 94, 'physics': 45}
-{'id': '1019', 'name': '叶十九', 'chinese': 105, 'math': 110, 'english': 110, 'physics': 65}
