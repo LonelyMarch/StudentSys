@@ -150,6 +150,7 @@ def insert():
             break
     save(student_list, 1)  # 追加进文件
     print("\n学生信息录入完毕\n")
+    return
 
 
 def search():
@@ -196,13 +197,14 @@ def search():
             info_search.clear()  # 清空列表
         while True:
             search_again = input("\n是否继续查询?\ty/n\n")
-            if search_again in ['y', 'n']:  # 判断回答是否有误
+            if search_again in ['y', 'n']:
                 break
         if search_again == "y":
             continue
         else:
-            print()
+            print()     #换行
             break
+    return
 
 
 def delete():
@@ -210,9 +212,9 @@ def delete():
         print("暂未保存学生信息")
     else:
         while True:
-            info = []
-            after = []
-            delete_flag = 1
+            info = []   #初始化信息列表
+            after = []  #初始化删除之后的列表
+            delete_flag = 1     #标记是否删除成功
             with open(student_info_txt, 'r', encoding='utf-8') as rfile:
                 for item in rfile:
                     info_d = dict(eval(item))
@@ -225,9 +227,9 @@ def delete():
                         break
                 for info_item in info:
                     if info_item["id"] != delete_id:
-                        after.append(info_item)
+                        after.append(info_item)     #将不是要删除的学生的信息存入列表
                     else:
-                        delete_flag = 0
+                        delete_flag = 0     #标记已删除
             elif mode == '2':
                 while True:
                     delete_name = input("\n请输入姓名：")
@@ -260,6 +262,7 @@ def delete():
             else:
                 print()
                 break
+    return
 
 
 def modify():
