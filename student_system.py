@@ -422,19 +422,11 @@ def sign_out():
         sign_out()  # 回答错误，再次询问
 
 
-def input(dict, id_yn=1, name_yn=1, chinese_yn=1, math_yn=1, english_yn=1, physics_yn=1, id_repeated=0, mode="insert", id='', name=''):  # TODO:
-    info = []
-    id_list = []
-    with open(student_info_txt, "r", encoding="utf-8") as rfile:
-        for item in rfile:
-            d = dict(eval(item))
-            info.append(d)
-            id_list.append(d["id"])
-    if mode == "modify":
-        if not id:
-            pass
-        else:
-            pass
+def putin(dict, id_yn=1, name_yn=1, id_repeated=0):
+    chinese_yn = 1
+    math_yn = 1
+    english_yn = 1
+    physics_yn = 1
     while True:
         if id_yn:
             id = input("\n请输入id:")
@@ -444,6 +436,11 @@ def input(dict, id_yn=1, name_yn=1, chinese_yn=1, math_yn=1, english_yn=1, physi
                 print('仅能输入数字')
                 continue
             if id_repeated:
+                id_list=[]
+                with open(student_info_txt,"r",encoding="utf-8") as rfile:
+                    for item in rfile:
+                        d=dict(eval(item))
+                        id_list.append(d["id"])
                 if id in id_list:  # 判断id是否重复
                     print("\nid与信息库中的重复，请重新输入")
                     continue
@@ -481,14 +478,10 @@ def input(dict, id_yn=1, name_yn=1, chinese_yn=1, math_yn=1, english_yn=1, physi
             print("输入无效")
             continue
         physics_yn = 0
-        student = {
-            "id": id,
-            "name": name,
-            "chinese": chinese,
-            "math": math,
-            "english": english,
-            "physics": physics,
-        }  # 将学生信息存入字典
+        return id,name,chinese,math,english,physics
+
+
+
 
 
 if __name__ == "__main__":
