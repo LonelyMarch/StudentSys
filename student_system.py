@@ -223,7 +223,7 @@ def delete():
                     delete_id = input("\n请输入id：")
                     if delete_id != '':
                         break
-                for info_item in info:  #DEBUG:
+                for info_item in info:
                     if info_item["id"] != delete_id:
                         after.append(info_item)
                     else:
@@ -243,7 +243,7 @@ def delete():
             if delete_flag:
                 print('库中无此学生信息')
             else:
-                save(info, 0)
+                save(info, 0)   #DEBUG:
                 print("删除完成\n")
                 while True:
                     show_answer = input("是否显示现在库中的信息\ty/n\n")
