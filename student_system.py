@@ -270,40 +270,32 @@ def modify():
         print("\n暂未保存学生信息\n")
         return
     else:
+        after=[]
+        dictionary={}
         mode = input("\n按id修改请输入1\t\t按姓名修改请输入2\n")
         if mode == '1':
             while True:
                 modify_id = input("\n请输入id：")
                 if modify != '':
                     break
-            """ with open(student_info_txt,'r',encoding='utf-8') as rfile:
-                    for item in rfile:
-                        d = dict(eval(item))
-                        if d["id"] == modify_id:
-                            print("已找到这名学生,可以修改相关信息")
-                            while True:
-                                try:
-                                    d["name"] = input("请输入姓名：")
-                                    d["chinese"] = input("请输入语文成绩：")
-                                    d["math"] = input("请输入数学成绩：")
-                                    d["english"] = input("请输入英语成绩：")
-                                    d["physics"] = input("请输入物理成绩：")
-                                except:
-                                    print("输入有误，请重新输入")
-                                else:
-                                    break
-                            wfile.write(str(d) + "\n")
-                            print("修改成功")
-                        else:
-                            wfile.write(str(d) + "\n")
-            elif mode == '2':
-                while True:
-                    modify_name = input("\n请输入姓名：")
-                    if modify_name != '':
-                        break
+            with open(student_info_txt, 'r', encoding='utf-8') as rfile:
+                for item in rfile:
+                    d = dict(eval(item))
+                    if d["id"] == modify_id:
+                        print("已找到这名学生,可以修改相关信息")
+                        putin(dictionary)
+                        after.append(str(dictionary) + "\n")
+                        print("修改成功")
+                    else:
+                        after.append(str(d) + "\n")
+        elif mode == '2':   #TODO:
+            while True:
+                modify_name = input("\n请输入姓名：")
+                if modify_name != '':
+                    break
     modify_again = input("是否继续修改\ty/n\n")
     if modify_again == "y":
-        modify() """
+        modify()
 
 
 def reorder():
@@ -422,7 +414,7 @@ def sign_out():
         sign_out()  # 回答错误，再次询问
 
 
-def putin(dict, id_yn=1, name_yn=1, id_repeated=0):
+def putin(dictionary,id_yn=1, name_yn=1, id_repeated=0):
     chinese_yn = 1
     math_yn = 1
     english_yn = 1
@@ -436,10 +428,10 @@ def putin(dict, id_yn=1, name_yn=1, id_repeated=0):
                 print('仅能输入数字')
                 continue
             if id_repeated:
-                id_list=[]
-                with open(student_info_txt,"r",encoding="utf-8") as rfile:
+                id_list = []
+                with open(student_info_txt, "r", encoding="utf-8") as rfile:
                     for item in rfile:
-                        d=dict(eval(item))
+                        d = dict(eval(item))
                         id_list.append(d["id"])
                 if id in id_list:  # 判断id是否重复
                     print("\nid与信息库中的重复，请重新输入")
@@ -478,10 +470,15 @@ def putin(dict, id_yn=1, name_yn=1, id_repeated=0):
             print("输入无效")
             continue
         physics_yn = 0
-        return id,name,chinese,math,english,physics
-
-
-
+        dictionary = {
+            "id": id,
+            "name": name,
+            "chinese": chinese,
+            "math": math,
+            "english": english,
+            "physics": physics,
+        } 
+        return dictionary
 
 
 if __name__ == "__main__":
