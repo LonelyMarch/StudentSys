@@ -293,6 +293,16 @@ def modify():
                 modify_name = input("\n请输入姓名：")
                 if modify_name != '':
                     break
+                with open(student_info_txt, 'r', encoding='utf-8') as rfile:
+                    for item in rfile:
+                        d = dict(eval(item))
+                        if d["name"] == modify_name:
+                            print("已找到这名学生,可以修改相关信息")
+                            putin(dictionary)
+                            after.append(str(dictionary) + "\n")
+                            print("修改成功")
+                        else:
+                            after.append(str(d) + "\n")
     modify_again = input("是否继续修改\ty/n\n")
     if modify_again == "y":
         modify()
