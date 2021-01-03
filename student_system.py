@@ -290,7 +290,7 @@ def modify():
                             after.append(str(dictionary) + "\n")
                         else:
                             after.append(str(d) + "\n")
-                        break
+                    break   #TODO:
             elif mode == '2':
                 while True:
                     modify_name = input("\n请输入姓名：")
@@ -306,7 +306,7 @@ def modify():
                             after.append(str(dictionary) + "\n")
                         else:
                             after.append(str(d) + "\n")
-                        break
+                    break
             else:
                 continue
             if modify_flag:
