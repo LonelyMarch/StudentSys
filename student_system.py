@@ -268,7 +268,7 @@ def delete():
 def modify():
     if not os.path.exists(student_info_txt):
         print("\n暂未保存学生信息\n")
-        return
+        
     else:
         after=[]
         dictionary={}
@@ -287,10 +287,9 @@ def modify():
                             modify_flag =0
                             print("已找到这名学生,可以修改相关信息")
                             putin(dictionary)
-                            after.append(str(dictionary) + "\n")
+                            after.append(str(dictionary))
                         else:
-                            after.append(str(d) + "\n")
-                    break   #TODO:
+                            after.append(str(d))
             elif mode == '2':
                 while True:
                     modify_name = input("\n请输入姓名：")
@@ -303,22 +302,22 @@ def modify():
                             modify_flag =0
                             print("已找到这名学生,可以修改相关信息")
                             putin(dictionary)
-                            after.append(str(dictionary) + "\n")
+                            after.append(str(dictionary))
                         else:
-                            after.append(str(d) + "\n")
-                    break
+                            after.append(str(d))
             else:
                 continue
             if modify_flag:
-                print("库中无此学生信息")
+                print("库中无此学生信息\n")
             else:
                 save(after,0)
-                print("修改成功")
+                print("修改成功\n")
             modify_again = input("是否继续修改\ty/n\n")
             if modify_again == "y":
                 modify()
             else:
                 break
+    return
 
 
 def reorder():
