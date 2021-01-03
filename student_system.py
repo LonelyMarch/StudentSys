@@ -272,40 +272,53 @@ def modify():
     else:
         after=[]
         dictionary={}
-        mode = input("\n按id修改请输入1\t\t按姓名修改请输入2\n")
-        if mode == '1':
-            while True:
-                modify_id = input("\n请输入id：")
-                if modify != '':
-                    break
-            with open(student_info_txt, 'r', encoding='utf-8') as rfile:
-                for item in rfile:
-                    d = dict(eval(item))
-                    if d["id"] == modify_id:
-                        print("已找到这名学生,可以修改相关信息")
-                        putin(dictionary)
-                        after.append(str(dictionary) + "\n")
-                        print("修改成功")
-                    else:
-                        after.append(str(d) + "\n")
-        elif mode == '2':   #TODO:
-            while True:
-                modify_name = input("\n请输入姓名：")
-                if modify_name != '':
-                    break
+        while True:
+            modify_flag=1
+            mode = input("\n按id修改请输入1\t\t按姓名修改请输入2\n")
+            if mode == '1':
+                while True:
+                    modify_id = input("\n请输入id：")
+                    if modify != '':
+                        break
+                with open(student_info_txt, 'r', encoding='utf-8') as rfile:
+                    for item in rfile:
+                        d = dict(eval(item))
+                        if d["id"] == modify_id:
+                            modify_flag =0
+                            print("已找到这名学生,可以修改相关信息")
+                            putin(dictionary)
+                            after.append(str(dictionary) + "\n")
+                        else:
+                            after.append(str(d) + "\n")
+                        break
+            elif mode == '2':
+                while True:
+                    modify_name = input("\n请输入姓名：")
+                    if modify_name != '':
+                        break
                 with open(student_info_txt, 'r', encoding='utf-8') as rfile:
                     for item in rfile:
                         d = dict(eval(item))
                         if d["name"] == modify_name:
+                            modify_flag =0
                             print("已找到这名学生,可以修改相关信息")
                             putin(dictionary)
                             after.append(str(dictionary) + "\n")
-                            print("修改成功")
                         else:
                             after.append(str(d) + "\n")
-    modify_again = input("是否继续修改\ty/n\n")
-    if modify_again == "y":
-        modify()
+                        break
+            else:
+                continue
+            if modify_flag:
+                print("库中无此学生信息")
+            else:
+                save(after,0)
+                print("修改成功")
+            modify_again = input("是否继续修改\ty/n\n")
+            if modify_again == "y":
+                modify()
+            else:
+                break
 
 
 def reorder():
@@ -424,7 +437,9 @@ def sign_out():
         sign_out()  # 回答错误，再次询问
 
 
-def putin(dictionary,id_yn=1, name_yn=1, id_repeated=0):
+def putin(dictionary,id_repeated=0):
+    id_yn=1
+    name_yn=1
     chinese_yn = 1
     math_yn = 1
     english_yn = 1
