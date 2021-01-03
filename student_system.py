@@ -69,82 +69,13 @@ def menu():
 
 def insert():
     student_list = []  # 初始化用于储存要添加的学生的信息的列表
-    id_list = []  # 初始化用于存储已存在id的列表
-    id_yn = 1  # 初始化学生信息是否输入成功的标记
-    name_yn = 1
-    chinese_yn = 1
-    math_yn = 1
-    english_yn = 1
-    physics_yn = 1
+    # if not os.path.exists(student_info_txt):
+        # os.mknod(student_info_txt) TODO:不存在则创建文件
     while True:  # 循环录入
-        try:  # NOTE:此处的 try_except 可以用 if(os.path.exists)_else 替换
-            with open(student_info_txt, "r", encoding="utf-8") as rfile:
-                for item in rfile:  # 遍历文件的每一个字典，结果为字符串
-                    d = dict(eval(item))  # 将字符串转为字典
-                    id_list.append(d["id"])  # 追加id到列表
-        except:
-            open(student_info_txt, 'w', encoding='utf-8')  # 文件不存在则创建
-        if id_yn:  # 如果未成功录入，则录入，否则跳过
-            id = input("\n请输入id:")
-        if not id:  # 判断id是否不为空
-            continue
-        elif not id.isdecimal():    # 判断id是否不又十进制的数字组成
-            print('仅能输入数字')
-            continue
-        elif id in id_list:  # 判断id是否重复
-            print("\nid与信息库中的重复，请重新输入")
-            continue
-        id_yn = 0  # 标记id录入成功
-        if name_yn:
-            name = input("请输入姓名:")
-        if not name:
-            continue
-        name_yn = 0
-        try:
-            if chinese_yn:
-                chinese = int(input("请输入语文成绩："))
-        except:  # 捕获因输入的不是整数而产生的错误
-            print("输入无效")
-            continue
-        chinese_yn = 0
-        try:
-            if math_yn:
-                math = int(input("请输入数学成绩："))
-        except:
-            print("输入无效")
-            continue
-        math_yn = 0
-        try:
-            if english_yn:
-                english = int(input("请输入英语成绩："))
-        except:
-            print("输入无效")
-            continue
-        english_yn = 0
-        try:
-            if physics_yn:
-                physics = int(input("请输入物理成绩："))
-        except:
-            print("输入无效")
-            continue
-        physics_yn = 0
-        student = {
-            "id": id,
-            "name": name,
-            "chinese": chinese,
-            "math": math,
-            "english": english,
-            "physics": physics,
-        }  # 将学生信息存入字典
-        student_list.append(student)  # 写入储存列表
+        dictionary=putin(id_repeated=1)
+        student_list.append(dictionary)  # 写入储存列表
         insert_again = input("\n是否继续添加学生信息？\ty/n\n")
         if insert_again == "y":
-            id_yn = 1  # 标记归位，以便下一次录入
-            name_yn = 1
-            chinese_yn = 1
-            math_yn = 1
-            english_yn = 1
-            physics_yn = 1
             continue
         else:
             break
@@ -435,7 +366,7 @@ def sign_out():
 
 
 def putin(id_repeated=0,id_repeated_others=0,id_except=0):
-    id_yn = 1
+    id_yn = 1   # 初始化学生信息是否输入成功的标记
     name_yn = 1
     chinese_yn = 1
     math_yn = 1
@@ -450,11 +381,11 @@ def putin(id_repeated=0,id_repeated_others=0,id_except=0):
                 print('仅能输入数字')
                 continue
             if id_repeated:
-                id_list = []
+                id_list = []    #初始化储存id的列表
                 with open(student_info_txt, "r", encoding="utf-8") as rfile:
-                    for item in rfile:
-                        d = dict(eval(item))
-                        id_list.append(d["id"])
+                    for item in rfile:  # 遍历文件的每一个字典，结果为字符串
+                        d = dict(eval(item))    # 将字符串转为字典
+                        id_list.append(d["id"]) # 将id写入列表
                 if id_repeated_others:
                     id_list.remove(id_except)
                 if id in id_list:  # 判断id是否重复
