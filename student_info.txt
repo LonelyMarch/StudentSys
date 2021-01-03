@@ -1,28 +1,12 @@
 {'id': '1002', 'name': '钱二', 'chinese': 60, 'math': 50, 'english': 71, 'physics': 30}
-
 {'id': '1003', 'name': '张三', 'chinese': 100, 'math': 118, 'english': 106, 'physics': 59}
-
 {'id': '1004', 'name': '李四', 'chinese': 95, 'math': 115, 'english': 114, 'physics': 67}
-
 {'id': '1005', 'name': '王五', 'chinese': 84, 'math': 98, 'english': 102, 'physics': 49}
-
 {'id': '1006', 'name': '王六', 'chinese': 12, 'math': 23, 'english': 65, 'physics': 23}
-
 {'id': '1008', 'name': '王八', 'chinese': 56, 'math': 56, 'english': 41, 'physics': 52}
-
 {'id': '1009', 'name': '杨九', 'chinese': 120, 'math': 120, 'english': 119, 'physics': 65}
-
 {'id': '1010', 'name': 'yangshi', 'chinese': 120, 'math': 120, 'english': 120, 'physics': 70}
-
 {'id': '1011', 'name': '张十一', 'chinese': 90, 'math': 100, 'english': 108, 'physics': 60}
-
 {'id': '1012', 'name': '孙十二', 'chinese': 0, 'math': 0, 'english': 0, 'physics': 0}
-
-{'id': '1013', 'name': '徐十三', 'chinese': 90, 'math': 110, 'english': 108, 'physics': 59}
-
-{'id': '1014', 'name': '沈十四', 'chinese': 85, 'math': 100, 'english': 105, 'physics': 55}
-
-{'id': '1015', 'name': '孙十五', 'chinese': 100, 'math': 100, 'english': 100, 'physics': 4}
-
-{}
-
+{'id': '1014', 'name': '徐十三', 'chinese': 100, 'math': 100, 'english': 100, 'physics': 100}
+{'id': '1015', 'name': '刘十五', 'chinese': 100, 'math': 100, 'english': 100, 'physics': 50}

@@ -210,6 +210,7 @@ def search():
 def delete():
     if not os.path.exists(student_info_txt):
         print("暂未保存学生信息")
+        return
     else:
         while True:
             info = []  # 初始化信息列表
@@ -261,19 +262,16 @@ def delete():
                 continue
             else:
                 print()
-                break
-    return
+                return
 
 
 def modify():
     if not os.path.exists(student_info_txt):
         print("\n暂未保存学生信息\n")
-        
     else:
-        after=[]
-        dictionary={}
+        after = []
         while True:
-            modify_flag=1
+            modify_flag = 1
             mode = input("\n按id修改请输入1\t\t按姓名修改请输入2\n")
             if mode == '1':
                 while True:
@@ -284,9 +282,9 @@ def modify():
                     for item in rfile:
                         d = dict(eval(item))
                         if d["id"] == modify_id:
-                            modify_flag =0
+                            modify_flag = 0
                             print("已找到这名学生,可以修改相关信息")
-                            putin(dictionary)
+                            dictionary = putin(id_repeated=1,id_repeated_others=1,id_except=d["id"])
                             after.append(str(dictionary))
                         else:
                             after.append(str(d))
@@ -299,9 +297,9 @@ def modify():
                     for item in rfile:
                         d = dict(eval(item))
                         if d["name"] == modify_name:
-                            modify_flag =0
+                            modify_flag = 0
                             print("已找到这名学生,可以修改相关信息")
-                            putin(dictionary)
+                            dictionary = putin(id_repeated=1,id_repeated_others=1,id_except=d["id"])
                             after.append(str(dictionary))
                         else:
                             after.append(str(d))
@@ -310,7 +308,7 @@ def modify():
             if modify_flag:
                 print("库中无此学生信息\n")
             else:
-                save(after,0)
+                save(after, 0)
                 print("修改成功\n")
             modify_again = input("是否继续修改\ty/n\n")
             if modify_again == "y":
@@ -436,9 +434,9 @@ def sign_out():
         sign_out()  # 回答错误，再次询问
 
 
-def putin(dictionary,id_repeated=0):
-    id_yn=1
-    name_yn=1
+def putin(id_repeated=0,id_repeated_others=0,id_except=0):
+    id_yn = 1
+    name_yn = 1
     chinese_yn = 1
     math_yn = 1
     english_yn = 1
@@ -457,6 +455,8 @@ def putin(dictionary,id_repeated=0):
                     for item in rfile:
                         d = dict(eval(item))
                         id_list.append(d["id"])
+                if id_repeated_others:
+                    id_list.remove(id_except)
                 if id in id_list:  # 判断id是否重复
                     print("\nid与信息库中的重复，请重新输入")
                     continue
@@ -501,7 +501,7 @@ def putin(dictionary,id_repeated=0):
             "math": math,
             "english": english,
             "physics": physics,
-        } 
+        }
         return dictionary
 
 
