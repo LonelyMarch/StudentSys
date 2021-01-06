@@ -69,12 +69,16 @@ def menu():
 
 def insert():
     student_list = []  # 初始化用于储存要添加的学生的信息的列表
-    # if not os.path.exists(student_info_txt):
-        # os.mknod(student_info_txt) TODO:不存在则创建文件
+    if not os.path.exists(student_info_txt):
+        with open(student_info_txt,"r",encoding="utf-8"):
+            pass
     while True:  # 循环录入
         dictionary=putin(id_repeated=1)
         student_list.append(dictionary)  # 写入储存列表
-        insert_again = input("\n是否继续添加学生信息？\ty/n\n")
+        while True:
+            insert_again = input("\n是否继续添加学生信息？\ty/n\n")
+            if insert_again in ["y","n"]:
+                break
         if insert_again == "y":
             continue
         else:
