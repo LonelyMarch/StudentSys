@@ -245,7 +245,10 @@ def modify():
             else:
                 save(after, 0)
                 print("修改成功\n")
-            modify_again = input("是否继续修改\ty/n\n")
+            while True:
+                modify_again = input("是否继续修改\ty/n\n")
+                if modify_again in ["y","n"]:
+                    break
             if modify_again == "y":
                 modify()
             else:
