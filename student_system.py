@@ -265,7 +265,6 @@ def reorder():
         for item in info_list:
             d = dict(eval(item))
             new.append(d)
-
     else:
         print("\n暂未保存学生信息\n")
         return
