@@ -271,7 +271,6 @@ def reorder():
     reorder_mode = int(
         input("请选择排序方式：\n0.按总成绩排序\n1.按语文成绩排序\n2.按数学成绩排序\n3.按英语成绩排序\n4.按物理成绩排序")
     )
-
     if reorder_mode not in [0, 1, 2, 3, 4]:
         print("\n输入有误请重新输入\n")
         reorder()
