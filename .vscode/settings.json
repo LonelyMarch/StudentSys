@@ -1,5 +1,4 @@
 {
-    
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.quickSuggestionsDelay": 5,
     "editor.defaultFormatter": "ms-python.python",
