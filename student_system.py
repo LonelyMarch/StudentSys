@@ -4,7 +4,7 @@
 '''
 @Author: LonelyMarch
 @LastEditors: LonelyMarch
-@LastEditTime: 2021-01-10 14:11:50
+@LastEditTime: 2021-01-10 14:19:19
 @FilePath: /StudentSys/student_system.py
 @version:
 @Descripttion:
@@ -357,7 +357,7 @@ def save(lst, mode):
     student_info.close()
 
 
-def show_info(lst):  # TODO:
+def show_info(lst):
     tb = prettytable.PrettyTable()
     tb.field_names = ["ID", "姓名", "语文成绩", "数学成绩", "英语成绩", "物理成绩", "总成绩"]
     tb.align["ID"] = "l"
