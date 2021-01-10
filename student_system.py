@@ -4,14 +4,16 @@
 '''
 @Author: LonelyMarch
 @LastEditors: LonelyMarch
-@LastEditTime: 2021-01-10 13:37:33
+@LastEditTime: 2021-01-10 14:11:50
 @FilePath: /StudentSys/student_system.py
-@version: 
-@Descripttion: 
+@version:
+@Descripttion:
 '''
 
 
 import os
+
+import prettytable
 
 student_info_txt = "student_info.txt"  # 将文件赋给一个变量
 
@@ -328,6 +330,7 @@ def total():
 
 
 def show():
+    print()
     info_list = []
     if os.path.exists(student_info_txt):
         with open(student_info_txt, "r", encoding="utf-8") as rfile:
@@ -335,13 +338,13 @@ def show():
                 d = dict(eval(item))
                 info_list.append(d)
             if info_list:
+                print("数据库中信息如下：\n")
                 show_info(info_list)
-                print()
-                print()
             else:
                 print('无学生信息')
     else:
         print("\n暂未保存学生信息\n")
+    print("\n—=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-—=-=-=-=-=-=-=-=-")
 
 
 def save(lst, mode):
@@ -355,13 +358,17 @@ def save(lst, mode):
 
 
 def show_info(lst):  # TODO:
-    format_title = "{:6}\t{:^12}\t{:^10}\t{:^10}\t{:^10}\t{:^10}  {:6}"
-    print(format_title.format("ID", "姓名", "语文成绩", "数学成绩", "英语成绩", "物理成绩", "总成绩"))
-    format_data = "{:6}\t{:^12}\t{:^10}\t{:^10}\t{:^10}\t{:^10}{:6}"
+    tb = prettytable.PrettyTable()
+    tb.field_names = ["ID", "姓名", "语文成绩", "数学成绩", "英语成绩", "物理成绩", "总成绩"]
+    tb.align["ID"] = "l"
+    tb.align["姓名"] = "l"
+    tb.align["语文成绩"] = "r"
+    tb.align["数学成绩"] = "r"
+    tb.align["英语成绩"] = "r"
+    tb.align["物理成绩"] = "r"
+    tb.align["总成绩"] = "r"
     for item in lst:
-        print(
-            format_data.format(
-                item["id"],
+        info = [item["id"],
                 item["name"],
                 item["chinese"],
                 item["math"],
@@ -370,9 +377,9 @@ def show_info(lst):  # TODO:
                 int(item["chinese"])
                 + int(item["math"])
                 + int(item["english"])
-                + int(item["physics"]),
-            )
-        )
+                + int(item["physics"])]
+        tb.add_row(info)
+    print(tb)
 
 
 def sign_out():

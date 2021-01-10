@@ -3,5 +3,7 @@
     "editor.quickSuggestionsDelay": 5,
     "editor.defaultFormatter": "ms-python.python",
     "python.autoComplete.addBrackets": true,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "prettier.useTabs": true,
+    "prettier.tabWidth": 4
 }
