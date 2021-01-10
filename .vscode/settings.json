@@ -2,5 +2,6 @@
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.quickSuggestionsDelay": 5,
     "editor.defaultFormatter": "ms-python.python",
-    "python.autoComplete.addBrackets": true
+    "python.autoComplete.addBrackets": true,
+    "editor.formatOnSave": true
 }

@@ -70,14 +70,14 @@ def menu():
 def insert():
     student_list = []  # 初始化用于储存要添加的学生的信息的列表
     if not os.path.exists(student_info_txt):
-        with open(student_info_txt,"r",encoding="utf-8"):
+        with open(student_info_txt, "r", encoding="utf-8"):
             pass
     while True:  # 循环录入
-        dictionary=putin(id_repeated=1)
+        dictionary = putin(id_repeated=1)
         student_list.append(dictionary)  # 写入储存列表
         while True:
             insert_again = input("\n是否继续添加学生信息？\ty/n\n")
-            if insert_again in ["y","n"]:
+            if insert_again in ["y", "n"]:
                 break
         if insert_again == "y":
             continue
@@ -219,7 +219,8 @@ def modify():
                         if d["id"] == modify_id:
                             modify_flag = 0
                             print("已找到这名学生,可以修改相关信息")
-                            dictionary = putin(id_repeated=1,id_repeated_others=1,id_except=d["id"])
+                            dictionary = putin(
+                                id_repeated=1, id_repeated_others=1, id_except=d["id"])
                             after.append(str(dictionary))
                         else:
                             after.append(str(d))
@@ -234,7 +235,8 @@ def modify():
                         if d["name"] == modify_name:
                             modify_flag = 0
                             print("已找到这名学生,可以修改相关信息")
-                            dictionary = putin(id_repeated=1,id_repeated_others=1,id_except=d["id"])
+                            dictionary = putin(
+                                id_repeated=1, id_repeated_others=1, id_except=d["id"])
                             after.append(str(dictionary))
                         else:
                             after.append(str(d))
@@ -247,7 +249,7 @@ def modify():
                 print("修改成功\n")
             while True:
                 modify_again = input("是否继续修改\ty/n\n")
-                if modify_again in ["y","n"]:
+                if modify_again in ["y", "n"]:
                     break
             if modify_again == "y":
                 modify()
@@ -257,32 +259,35 @@ def modify():
 
 
 def reorder():
-    show()
     if os.path.exists(student_info_txt):
         with open(student_info_txt, "r", encoding="utf-8") as rfile:
-            info_list = rfile.readlines()
-        new = []
-        for item in info_list:
-            d = dict(eval(item))
-            new.append(d)
+            new = []
+            for item in rfile:
+                d = dict(eval(item))
+                new.append(d)
     else:
         print("\n暂未保存学生信息\n")
         return
-    reorder_mode = int(
-        input("请选择排序方式：\n0.按总成绩排序\n1.按语文成绩排序\n2.按数学成绩排序\n3.按英语成绩排序\n4.按物理成绩排序")
-    )
-
-    if reorder_mode not in [0, 1, 2, 3, 4]:
+    while True:
+        try:
+            reorder_mode = int(
+                input("请选择排序方式：\n0.按总成绩排序\n1.按语文成绩排序\n2.按数学成绩排序\n3.按英语成绩排序\n4.按物理成绩排序\n")
+            )
+        except:
+            print("\n输入有误请重新输入\n")
+            continue
+        if reorder_mode in [0, 1, 2, 3, 4]:
+            break
         print("\n输入有误请重新输入\n")
-        reorder()
-    reorder_mode_ad = int(input("选择 1.升序 或 2.降序\n"))
-    if reorder_mode_ad == 1:
-        reorder_mode_ad = True
-    elif reorder_mode_ad == 2:
-        reorder_mode_ad = False
-    else:
+    while True:
+        reorder_mode_ad = int(input("\n选择 1.升序 或 2.降序\n"))
+        if reorder_mode_ad == 1:
+            reorder_mode_ad = False
+            break
+        elif reorder_mode_ad == 2:
+            reorder_mode_ad = True
+            break
         print("输入有误，请重新输入\n")
-        reorder()
     if reorder_mode == 0:
         new.sort(
             key=lambda new: int(new["chinese"])
@@ -299,7 +304,10 @@ def reorder():
         new.sort(key=lambda new: int(new["english"]), reverse=reorder_mode_ad)
     else:
         new.sort(key=lambda new: int(new["physics"]), reverse=reorder_mode_ad)
+    print("\n排序完成，结果如下：\n")
     show_info(new)
+    print()
+    save(new, 0)
 
 
 def total():
@@ -372,7 +380,7 @@ def sign_out():
         sign_out()  # 回答错误，再次询问
 
 
-def putin(id_repeated=0,id_repeated_others=0,id_except=0):
+def putin(id_repeated=0, id_repeated_others=0, id_except=0):
     id_yn = 1   # 初始化学生信息是否输入成功的标记
     name_yn = 1
     chinese_yn = 1
@@ -388,11 +396,11 @@ def putin(id_repeated=0,id_repeated_others=0,id_except=0):
                 print('仅能输入数字')
                 continue
             if id_repeated:
-                id_list = []    #初始化储存id的列表
+                id_list = []  # 初始化储存id的列表
                 with open(student_info_txt, "r", encoding="utf-8") as rfile:
                     for item in rfile:  # 遍历文件的每一个字典，结果为字符串
                         d = dict(eval(item))    # 将字符串转为字典
-                        id_list.append(d["id"]) # 将id写入列表
+                        id_list.append(d["id"])  # 将id写入列表
                 if id_repeated_others:
                     id_list.remove(id_except)
                 if id in id_list:  # 判断id是否重复
