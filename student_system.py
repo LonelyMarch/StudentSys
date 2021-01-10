@@ -350,7 +350,7 @@ def save(lst, mode):
     student_info.close()
 
 
-def show_info(lst):
+def show_info(lst):  # TODO:
     format_title = "{:6}\t{:^12}\t{:^10}\t{:^10}\t{:^10}\t{:^10}  {:6}"
     print(format_title.format("ID", "姓名", "语文成绩", "数学成绩", "英语成绩", "物理成绩", "总成绩"))
     format_data = "{:6}\t{:^12}\t{:^10}\t{:^10}\t{:^10}\t{:^10}{:6}"
