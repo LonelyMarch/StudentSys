@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-"""
-Author: LonelyMarch
-Date: 2020-12-27 18:28:29
-LastEditors: LonelyMarch
-LastEditTime: 2020-12-29 09:37:35
-FilePath: /StudentSys/student_system.py
-"""
+'''
+@Author: LonelyMarch
+@LastEditors: LonelyMarch
+@LastEditTime: 2021-01-10 13:37:33
+@FilePath: /StudentSys/student_system.py
+@version: 
+@Descripttion: 
+'''
+
 
 import os
 
@@ -329,11 +331,13 @@ def show():
     info_list = []
     if os.path.exists(student_info_txt):
         with open(student_info_txt, "r", encoding="utf-8") as rfile:
-            info = rfile.readlines()
-            for item in info:
-                info_list.append(eval(item))
+            for item in rfile:
+                d = dict(eval(item))
+                info_list.append(d)
             if info_list:
                 show_info(info_list)
+                print()
+                print()
             else:
                 print('无学生信息')
     else:
