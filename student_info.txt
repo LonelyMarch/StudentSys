@@ -10,4 +10,3 @@
 {'id': '1008', 'name': '王八', 'chinese': 56, 'math': 56, 'english': 41, 'physics': 52}
 {'id': '1006', 'name': '王六', 'chinese': 12, 'math': 23, 'english': 65, 'physics': 23}
 {'id': '1012', 'name': '孙十二', 'chinese': 0, 'math': 0, 'english': 0, 'physics': 0}
-
