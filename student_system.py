@@ -314,13 +314,15 @@ def total():
     if os.path.exists(student_info_txt):
         with open(student_info_txt, "r", encoding="utf-8") as rfile:
             student_list = rfile.readlines()
-            if student_list != "":
+            if student_list != []:
                 print(f"共有{len(student_list)}名学生\n")
                 print()
             else:
                 print("无学生信息\n")
+                print()
     else:
-        print("\n暂未保存学生信息\n")
+        print("暂未保存学生信息\n")
+        print()
 
 
 def show():
