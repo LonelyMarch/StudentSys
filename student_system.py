@@ -4,7 +4,7 @@
 '''
 @Author: LonelyMarch
 @LastEditors: LonelyMarch
-@LastEditTime: 2021-01-10 14:40:53
+@LastEditTime: 2021-01-24 11:23:41
 @FilePath: /StudentSys/student_system.py
 @version:
 @Descripttion:
@@ -24,37 +24,21 @@ print("\n====================学生信息管理系统====================")
 
 def main():
     global implemented  # 声明全局变量
+    function = {"0": sign_out, "1": insert, "2": search, "3": delete,
+                "4": modify, "5": reorder, "6": total, "7": show}
     while True:
         menu()
-        choice = input("请选择\n")
-        if choice in ["0", "1", "2", "3", "4", "5", "6", "7"]:
-            if choice == "0":
-                implemented = 0  # 标记子函数未被执行
-                sign_out()
-                break
-            elif choice == "1":
-                print("\n—=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-—=-=-=-=-=-=-=-=-")
-                insert()  # 录入学生信息
-            elif choice == "2":
-                print("\n—=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-—=-=-=-=-=-=-=-=-")
-                search()  # 查找学生信息
-            elif choice == "3":
-                print("\n—=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-—=-=-=-=-=-=-=-=-")
-                delete()  # 删除学生信息
-            elif choice == "4":
-                print("\n—=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-—=-=-=-=-=-=-=-=-")
-                modify()  # 修改学生信息
-            elif choice == "5":
-                print("\n—=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-—=-=-=-=-=-=-=-=-")
-                reorder()  # 排序
-            elif choice == "6":
-                print("\n—=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-—=-=-=-=-=-=-=-=-")
-                total()  # 统计总人数
-            else:
-                print("\n—=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-—=-=-=-=-=-=-=-=-")
-                show()  # 显示所有学生信息
-        else:
+        try:
+            choice = function[input("请选择\n")]
+        except:
             implemented = 0  # 标记子函数未被执行
+            continue
+        if choice == "0":
+            implemented = 0  # 标记子函数未被执行
+            choice()
+            break
+        print("\n—=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-—=-=-=-=-=-=-=-=-")
+        choice()
 
 
 def menu():
