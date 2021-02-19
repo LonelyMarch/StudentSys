@@ -4,7 +4,7 @@
 '''
 @Author: LonelyMarch
 @LastEditors: LonelyMarch
-@LastEditTime: 2021-01-24 11:23:41
+@LastEditTime: 2021-02-19 18:50:44
 @FilePath: /StudentSys/student_system.py
 @version:
 @Descripttion:
@@ -24,21 +24,21 @@ print("\n====================学生信息管理系统====================")
 
 def main():
     global implemented  # 声明全局变量
-    function = {"0": sign_out, "1": insert, "2": search, "3": delete,
+    function = {"1": insert, "2": search, "3": delete,
                 "4": modify, "5": reorder, "6": total, "7": show}
     while True:
         menu()
         try:
-            choice = function[input("请选择\n")]
+            choice = input("请选择\t(输入行首数字)\n")
         except:
             implemented = 0  # 标记子函数未被执行
             continue
         if choice == "0":
             implemented = 0  # 标记子函数未被执行
-            choice()
+            sign_out()
             break
         print("\n—=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-—=-=-=-=-=-=-=-=-")
-        choice()
+        function[choice]()
 
 
 def menu():
@@ -259,7 +259,8 @@ def reorder():
     while True:
         try:
             reorder_mode = int(
-                input("请选择排序方式：\n0.按总成绩排序\n1.按语文成绩排序\n2.按数学成绩排序\n3.按英语成绩排序\n4.按物理成绩排序\n")
+                input(
+                    "请选择排序方式:\t(输入行首数字)\n0.按总成绩排序\n1.按语文成绩排序\n2.按数学成绩排序\n3.按英语成绩排序\n4.按物理成绩排序\n")
             )
         except:
             print("\n输入有误请重新输入\n")
@@ -268,7 +269,7 @@ def reorder():
             break
         print("\n输入有误请重新输入\n")
     while True:
-        reorder_mode_ad = int(input("\n选择 1.升序 或 2.降序\n"))
+        reorder_mode_ad = int(input("\n选择升序请输入1\n选择降序请输入2\n"))
         if reorder_mode_ad == 1:
             reorder_mode_ad = False
             break

@@ -4,4 +4,6 @@
 >[下载exe文件](https://github.com/LonelyMarch/StudentSys/releases)
   
 ### Update log :
-+ 2021/01/24 --- m --- 将 "功能选择" 由 "if语句" 改为了 "字典管理"
++ 2021/01/24 - change - 将 功能选择 由 ifelse 改为了 字典映射
++ 2021/02/19 - repair - 修复了 执行完功能后有时不出现功能菜单 的漏洞
++ 2021/02/19 - repair - 修复了 选择"0.退出"之后仍未退出 的漏洞
