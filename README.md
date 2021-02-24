@@ -3,6 +3,9 @@
   
 >[下载exe文件](https://github.com/LonelyMarch/StudentSys/releases)
   
+### Doing :
++ 将储存引擎改为MySQL
+  
 ### Update log :
 { 'c' -> "change" , 'r' -> "repair" , 'a' -> "add" }
   
