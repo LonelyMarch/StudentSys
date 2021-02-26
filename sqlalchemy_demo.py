@@ -4,7 +4,7 @@
 '''
 @Author: LonelyMarch
 @LastEditors: LonelyMarch
-@LastEditTime: 2021-02-25 20:00:34
+@LastEditTime: 2021-02-26 20:07:30
 @FilePath: /StudentSys/sqlalchemy_demo.py
 @version: 
 @Descripttion: 
@@ -17,6 +17,9 @@ from sqlalchemy import create_engine  # 26Kb
 from sqlalchemy import Column, Integer, String, Float  # 103KB
 from sqlalchemy.ext.declarative import declarative_base  # 29KB
 from sqlalchemy.orm import sessionmaker, Session  # 133KB
+
+os.system('mysql')
+
 
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 # 创建映射表 ↓↓↓
@@ -90,3 +93,35 @@ def menu():
         print("\t7.显示所有学生信息")
         print("\t0.退出")
         print("========================================================")
+
+
+def insert():
+    pass
+
+
+def search():
+    pass
+
+
+def modify():
+    pass
+
+
+def reorder():
+    pass
+
+
+def total():
+    pass
+
+
+def show():
+    pass
+
+
+def delete():
+    pass
+
+
+def sign_out():
+    pass
